@@ -300,7 +300,8 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); colo
     <div style="font-size:17px;font-weight:700;margin-bottom:16px;">🧾 Struk Order</div>
     <div class="struk-wrap"><div class="struk" id="struk-content"></div></div>
     <div class="print-action-row">
-      <button class="btn btn-primary" style="flex:1;" onclick="printPDF()">📄 Simpan PDF / Print</button>
+      <button class="btn btn-primary" style="flex:1;" onclick="printPDF()">📄 PDF / Print</button>
+      <button class="btn" style="flex:1;background:#25D366;color:white;box-shadow:0 4px 14px rgba(37,211,102,0.3);" onclick="sendStrukWA()">📱 Kirim WA</button>
     </div>
     <div class="rawbt-row">
       <span style="font-size:16px;">🖨️</span>
@@ -575,6 +576,32 @@ function printRawBT() {
     c('Terima kasih! :)'), '', '', ''
   ].filter(x=>x!=='').join('\n');
   window.location.href='rawbt:'+encodeURIComponent(lines);
+}
+
+// ===== KIRIM STRUK VIA WA =====
+function sendStrukWA() {
+  if(!currentStruk) return;
+  const o = currentStruk;
+  const sn = settingsCache['set-name']||'Goklin Laundry';
+  const clean = o.phone.replace(/\D/g,'');
+  const num = clean.startsWith('0')?'62'+clean.slice(1):clean;
+  const msg = [
+    `🧾 *STRUK ${sn.toUpperCase()}*`,
+    ``,
+    `Nama    : ${o.name}`,
+    `Layanan : ${PRICE_MAP[o.service]?.label||o.service}`,
+    `Berat   : ${o.weight} kg`,
+    `Est.    : ${o.est_label||'-'}`,
+    o.note ? `Catatan : ${o.note}` : null,
+    ``,
+    `*Total  : Rp ${Number(o.total).toLocaleString('id')}*`,
+    ``,
+    `🔑 Kode Lacak: *${o.invoice}*`,
+    ``,
+    `Tunjukkan kode ini saat mengambil cucian ya! 😊`,
+    `Terima kasih sudah mempercayakan cucian Anda kepada kami 🫧`
+  ].filter(x=>x!==null).join('\n');
+  window.open(`https://wa.me/${num}?text=${encodeURIComponent(msg)}`,'_blank');
 }
 
 // ===== ORDERS =====
