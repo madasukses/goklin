@@ -317,7 +317,7 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); colo
 <div class="toast" id="toast"></div>
 
 <script>
-const API_URL = 'https://script.google.com/macros/s/AKfycbxdiGvvCxAIMX4jvp6NV2-nkjAe7m_lpav9arvoneXvTdrkv23ThCGByQ6u_Gsn3ji8/exec';
+const API_URL = 'https://script.google.com/macros/s/AKfycbxHvpXMXT7_dsGt9yifpKNa0hcpjjCKeEkCfqbdGOy-dGCfdt2tnFzot5QZxDYO65lS/exec';
 
 async function apiGet(action) {
   try { const r=await fetch(`${API_URL}?action=${action}`); return await r.json(); } catch(e) { return null; }
@@ -425,25 +425,6 @@ function calcPrice() {
   document.getElementById('ps-total').textContent='Rp '+(price*weight).toLocaleString('id');
 }
 
-// ===== INVOICE FORMAT: GK + MM + DD + NN (reset tiap hari) =====
-function generateInvoice() {
-  const now = new Date();
-  const mm = String(now.getMonth()+1).padStart(2,'0');
-  const dd = String(now.getDate()).padStart(2,'0');
-  const today = now.toISOString().slice(0,10);
-  const storedDate = localStorage.getItem('gkl_day_date');
-  let counter;
-  if(storedDate === today) {
-    counter = parseInt(localStorage.getItem('gkl_day_counter')||'0') + 1;
-  } else {
-    counter = 1; // Reset tiap hari baru
-  }
-  localStorage.setItem('gkl_day_date', today);
-  localStorage.setItem('gkl_day_counter', String(counter));
-  const nn = String(counter).padStart(2,'0');
-  return `GK${mm}${dd}${nn}`;
-}
-
 // ===== SUBMIT ORDER =====
 async function submitOrder() {
   const name=document.getElementById('f-name').value.trim();
@@ -455,8 +436,12 @@ async function submitOrder() {
   if(!name){showToast('⚠️ Nama wajib diisi!');return;}
   if(!phone){showToast('⚠️ Nomor HP wajib diisi!');return;}
   if(weight<=0){showToast('⚠️ Berat harus lebih dari 0!');return;}
+  showLoading('Membuat nomor invoice...');
+  // Ambil invoice dari Sheets — dijamin unik, tidak bentrok
+  const invRes = await apiGet('getNextInvoice');
+  if(!invRes || !invRes.invoice) { hideLoading(); showToast('❌ Gagal buat invoice. Cek koneksi.'); return; }
+  const invoice = invRes.invoice;
   showLoading('Menyimpan order...');
-  const invoice = generateInvoice();
   const now=new Date();
   const price=getPrice(service);
   const total=price*weight;
