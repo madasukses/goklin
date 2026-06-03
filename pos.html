@@ -317,7 +317,7 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); colo
 <div class="toast" id="toast"></div>
 
 <script>
-const API_URL = 'https://script.google.com/macros/s/AKfycbxHvpXMXT7_dsGt9yifpKNa0hcpjjCKeEkCfqbdGOy-dGCfdt2tnFzot5QZxDYO65lS/exec';
+const API_URL = 'https://script.google.com/macros/s/AKfycby94b_zWONKZJa5VpiWW1hS4Bsm6pugJyaHcRpxFa3_U-PZ7EW_9qJcmt-OxApVbrU/exec';
 
 async function apiGet(action) {
   try { const r=await fetch(`${API_URL}?action=${action}`); return await r.json(); } catch(e) { return null; }
