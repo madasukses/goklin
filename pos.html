@@ -313,23 +313,25 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); colo
 // ===== SUPABASE CONFIG =====
 const SUPA_URL = 'https://ccgoraufsoljgrdatozh.supabase.co';
 const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNjZ29yYXVmc29samdyZGF0b3poIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODEwMDAxNTUsImV4cCI6MjA5NjU3NjE1NX0.clzivXD50No__1Nu_bFkeGU6Rg9qk5ih0ZrHqLVb7AQ';
-const H = { 'Content-Type':'application/json', 'apikey':SUPA_KEY, 'Authorization':'Bearer '+SUPA_KEY };
+const H = { 'Content-Type':'application/json', 'Authorization':'Bearer '+SUPA_KEY };
+// apikey dikirim via URL param karena beberapa proxy memblokir header apikey
+function supaUrl(path) { return `${SUPA_URL}${path}${path.includes('?')?'&':'?'}apikey=${SUPA_KEY}`; }
 
 async function sbGet(table, params='') {
-  const r = await fetch(`${SUPA_URL}/rest/v1/${table}?${params}`, { headers: H });
+  const r = await fetch(supaUrl(`/rest/v1/${table}${params?'?'+params:''}`), { headers: H });
   return r.ok ? r.json() : [];
 }
 async function sbPost(table, body) {
-  const r = await fetch(`${SUPA_URL}/rest/v1/${table}`, { method:'POST', headers:{...H,'Prefer':'return=representation'}, body:JSON.stringify(body) });
+  const r = await fetch(supaUrl(`/rest/v1/${table}`), { method:'POST', headers:{...H,'Prefer':'return=representation'}, body:JSON.stringify(body) });
   return r.ok ? r.json() : null;
 }
 async function sbPatch(table, match, body) {
-  const r = await fetch(`${SUPA_URL}/rest/v1/${table}?${match}`, { method:'PATCH', headers:{...H,'Prefer':'return=representation'}, body:JSON.stringify(body) });
+  const r = await fetch(supaUrl(`/rest/v1/${table}?${match}`), { method:'PATCH', headers:{...H,'Prefer':'return=representation'}, body:JSON.stringify(body) });
   return r.ok;
 }
 async function sbRpc(fn, params={}) {
   try {
-    const r = await fetch(`${SUPA_URL}/rest/v1/rpc/${fn}`, { method:'POST', headers:H, body:JSON.stringify(params) });
+    const r = await fetch(supaUrl(`/rest/v1/rpc/${fn}`), { method:'POST', headers:H, body:JSON.stringify(params) });
     if(!r.ok) return null;
     const text = await r.text();
     try { return JSON.parse(text); } catch(e) { return text.replace(/"/g,'').trim(); }

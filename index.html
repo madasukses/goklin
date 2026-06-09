@@ -122,7 +122,8 @@ body { font-family:'Plus Jakarta Sans',sans-serif; background:linear-gradient(16
 <script>
 const SUPA_URL = 'https://ccgoraufsoljgrdatozh.supabase.co';
 const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNjZ29yYXVmc29samdyZGF0b3poIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODEwMDAxNTUsImV4cCI6MjA5NjU3NjE1NX0.clzivXD50No__1Nu_bFkeGU6Rg9qk5ih0ZrHqLVb7AQ';
-const H = { 'apikey':SUPA_KEY, 'Authorization':'Bearer '+SUPA_KEY };
+const H = { 'Authorization':'Bearer '+SUPA_KEY };
+function supaUrl(path) { return `${SUPA_URL}${path}${path.includes('?')?'&':'?'}apikey=${SUPA_KEY}`; }
 
 const PRICE_MAP = {
   'cuci-setrika':{ label:'Cuci + Setrika' }, 'cuci':{ label:'Cuci Saja' },
@@ -144,7 +145,7 @@ function showToast(msg) {
 
 async function loadSettings() {
   try {
-    const r = await fetch(`${SUPA_URL}/rest/v1/settings?select=key,value`, { headers: H });
+    const r = await fetch(supaUrl('/rest/v1/settings?select=key,value'), { headers: H });
     const rows = await r.json();
     rows.forEach(row => {
       if(row.key==='set-name')    document.getElementById('store-name-display').textContent = row.value;
@@ -161,7 +162,7 @@ async function trackOrder() {
   if(!code) { showToast('⚠️ Masukkan kode invoice dulu!'); return; }
   showLoading();
   try {
-    const r = await fetch(`${SUPA_URL}/rest/v1/orders?invoice=eq.${code}&select=*`, { headers: H });
+    const r = await fetch(supaUrl(`/rest/v1/orders?invoice=eq.${code}&select=*`), { headers: H });
     const rows = await r.json();
     hideLoading();
     const result = document.getElementById('track-result');
