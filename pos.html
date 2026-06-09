@@ -20,12 +20,10 @@
 }
 * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100dvh; overflow-x: hidden; }
-
-.page { display: none; min-height: 100dvh; flex-direction: column; animation: fadeIn .25s ease; }
-.page.active { display: flex; }
+.page { display:none; min-height:100dvh; flex-direction:column; animation:fadeIn .25s ease; }
+.page.active { display:flex; }
 @keyframes fadeIn { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:translateY(0)} }
 
-/* LOGIN */
 #page-login { background:var(--bg); align-items:center; justify-content:center; padding:24px; }
 .login-card { background:var(--card);border-radius:var(--radius);padding:32px 24px;width:100%;max-width:380px;box-shadow:var(--shadow-lg); }
 .login-header { text-align:center;margin-bottom:28px; }
@@ -35,7 +33,6 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); colo
 .login-back { text-align:center;margin-top:14px; }
 .login-back a { font-size:12px;color:var(--text-muted);text-decoration:none; }
 
-/* DASHBOARD */
 #page-dashboard { background:var(--bg); padding-bottom:80px; }
 .dash-header { background:linear-gradient(135deg,var(--blue),#4f7ef7);padding:48px 20px 20px;color:white; }
 .dash-header-top { display:flex;align-items:center;justify-content:space-between;margin-bottom:20px; }
@@ -63,13 +60,11 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); colo
 .input-field { width:100%;padding:14px 16px;border:1.5px solid var(--gray-200);border-radius:var(--radius-sm);font-size:16px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:500;color:var(--text);background:var(--gray-50);outline:none;transition:border-color .2s,box-shadow .2s; }
 .input-field:focus { border-color:var(--blue);box-shadow:0 0 0 3px rgba(26,86,219,0.1);background:#fff; }
 .input-field::placeholder { color:var(--gray-300); }
-.input-field.mono { font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:0.05em; }
 
 .btn { width:100%;padding:15px;border-radius:var(--radius-sm);font-size:15px;font-weight:600;font-family:'Plus Jakarta Sans',sans-serif;border:none;cursor:pointer;transition:transform .15s;display:flex;align-items:center;justify-content:center;gap:8px; }
 .btn:active { transform:scale(0.97); }
 .btn-primary { background:linear-gradient(135deg,var(--blue),#4f7ef7);color:white;box-shadow:0 4px 14px rgba(26,86,219,0.3); }
 .btn-teal { background:linear-gradient(135deg,var(--teal),#14b8a6);color:white;box-shadow:0 4px 14px rgba(13,148,136,0.3); }
-.btn-outline { background:transparent;color:var(--blue);border:1.5px solid var(--blue); }
 .btn-ghost { background:var(--gray-100);color:var(--gray-600); }
 .btn-sm { padding:10px 14px;font-size:13px;border-radius:8px;width:auto; }
 
@@ -107,7 +102,6 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); colo
 .modal-sheet { background:var(--card);border-radius:24px 24px 0 0;padding:24px 24px calc(24px + env(safe-area-inset-bottom));width:100%;max-width:480px;animation:slideUp .3s ease; }
 @keyframes slideUp { from{transform:translateY(100%)} to{transform:translateY(0)} }
 .modal-handle { width:40px;height:4px;background:var(--gray-200);border-radius:2px;margin:0 auto 20px; }
-
 .struk-wrap { display:flex;justify-content:center;margin-bottom:16px; }
 .struk { border:1.5px dashed var(--gray-300);border-radius:8px;padding:12px;font-size:11px;width:210px; }
 .struk-header { text-align:center;margin-bottom:8px;padding-bottom:8px;border-bottom:1px dashed var(--gray-300); }
@@ -119,7 +113,6 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); colo
 .struk-invoice { text-align:center;margin-top:8px; }
 .struk-invoice-code { font-family:'DM Mono',monospace;font-size:15px;font-weight:700;color:var(--blue);letter-spacing:0.08em; }
 .struk-footer { text-align:center;font-size:9px;color:var(--text-muted);margin-top:6px; }
-
 .print-action-row { display:flex;gap:8px;margin-bottom:10px; }
 .rawbt-row { background:var(--amber-light);border:1px solid #fcd34d;border-radius:8px;padding:10px 12px;font-size:11px;color:#92400e;margin-bottom:12px;display:flex;align-items:center;gap:8px; }
 
@@ -301,7 +294,7 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); colo
     <div class="struk-wrap"><div class="struk" id="struk-content"></div></div>
     <div class="print-action-row">
       <button class="btn btn-primary" style="flex:1;" onclick="printPDF()">📄 PDF / Print</button>
-      <button class="btn" style="flex:1;background:#25D366;color:white;box-shadow:0 4px 14px rgba(37,211,102,0.3);" onclick="sendStrukWA()">📱 Kirim WA</button>
+      <button class="btn" style="flex:1;background:#25D366;color:white;" onclick="sendStrukWA()">📱 Kirim WA</button>
     </div>
     <div class="rawbt-row">
       <span style="font-size:16px;">🖨️</span>
@@ -317,13 +310,26 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); colo
 <div class="toast" id="toast"></div>
 
 <script>
-const API_URL = 'https://script.google.com/macros/s/AKfycby94b_zWONKZJa5VpiWW1hS4Bsm6pugJyaHcRpxFa3_U-PZ7EW_9qJcmt-OxApVbrU/exec';
+// ===== SUPABASE CONFIG =====
+const SUPA_URL = 'https://ccgoraufsoljgrdatozh.supabase.co';
+const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNjZ29yYXVmc29samdyZGF0b3poIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODEwMDAxNTUsImV4cCI6MjA5NjU3NjE1NX0.clzivXD50No__1Nu_bFkeGU6Rg9qk5ih0ZrHqLVb7AQ';
+const H = { 'Content-Type':'application/json', 'apikey':SUPA_KEY, 'Authorization':'Bearer '+SUPA_KEY };
 
-async function apiGet(action) {
-  try { const r=await fetch(`${API_URL}?action=${action}`); return await r.json(); } catch(e) { return null; }
+async function sbGet(table, params='') {
+  const r = await fetch(`${SUPA_URL}/rest/v1/${table}?${params}`, { headers: H });
+  return r.ok ? r.json() : [];
 }
-async function apiPost(action, data) {
-  try { const r=await fetch(`${API_URL}?action=${action}`,{method:'POST',body:JSON.stringify(data)}); return await r.json(); } catch(e) { return null; }
+async function sbPost(table, body) {
+  const r = await fetch(`${SUPA_URL}/rest/v1/${table}`, { method:'POST', headers:{...H,'Prefer':'return=representation'}, body:JSON.stringify(body) });
+  return r.ok ? r.json() : null;
+}
+async function sbPatch(table, match, body) {
+  const r = await fetch(`${SUPA_URL}/rest/v1/${table}?${match}`, { method:'PATCH', headers:{...H,'Prefer':'return=representation'}, body:JSON.stringify(body) });
+  return r.ok;
+}
+async function sbRpc(fn, params={}) {
+  const r = await fetch(`${SUPA_URL}/rest/v1/rpc/${fn}`, { method:'POST', headers:H, body:JSON.stringify(params) });
+  return r.ok ? r.json() : null;
 }
 
 const PRICE_MAP = {
@@ -348,8 +354,6 @@ let currentStruk = null;
 
 function showLoading(t='Memuat...') { document.getElementById('loading').classList.add('show'); document.getElementById('loading-text').textContent=t; }
 function hideLoading() { document.getElementById('loading').classList.remove('show'); }
-
-// ===== AUTH =====
 function isLoggedIn() { return localStorage.getItem('gkl_auth')==='yes'; }
 function setLogin()   { localStorage.setItem('gkl_auth','yes'); }
 function clearLogin() { localStorage.removeItem('gkl_auth'); }
@@ -367,40 +371,50 @@ function enterDashboard() {
   loadSettingsToForm();
 }
 
+// ===== SETTINGS =====
+async function loadSettings() {
+  const rows = await sbGet('settings','select=key,value');
+  if(rows && rows.length) {
+    rows.forEach(r => { settingsCache[r.key] = r.value; });
+  }
+}
+
+function loadSettingsToForm() {
+  ['set-name','set-tagline','set-hours','set-address','set-wa','set-pass','p-cuci-setrika','p-cuci','p-setrika','p-express','p-selimut'].forEach(k=>{
+    const el=document.getElementById(k); if(el && settingsCache[k]) el.value=settingsCache[k];
+  });
+}
+
+async function saveSettings() {
+  showLoading('Menyimpan...');
+  const keys = ['set-name','set-tagline','set-hours','set-address','set-wa','set-pass','p-cuci-setrika','p-cuci','p-setrika','p-express','p-selimut'];
+  for(const k of keys) {
+    const el = document.getElementById(k);
+    if(!el) continue;
+    const val = el.value;
+    settingsCache[k] = val;
+    const existing = await sbGet('settings',`key=eq.${k}&select=key`);
+    if(existing.length > 0) await sbPatch('settings',`key=eq.${k}`,{ value: val });
+    else await sbPost('settings',{ key: k, value: val });
+  }
+  hideLoading();
+  showToast('✅ Pengaturan disimpan!');
+  calcPrice();
+}
+
+function getPrice(service) {
+  const k = PRICE_MAP[service]?.key;
+  return parseInt(settingsCache[k] || document.getElementById(k)?.value || PRICE_MAP[service]?.def || 7000);
+}
+
+// ===== LOGIN =====
 function doLogin() {
   const pass = document.getElementById('login-pass').value;
-  const correct = settingsCache['set-pass']||'laundry123';
+  const correct = settingsCache['set-pass'] || 'laundry123';
   if(pass===correct) { setLogin(); document.getElementById('login-pass').value=''; enterDashboard(); }
   else showToast('❌ Password salah!');
 }
-
 function doLogout() { clearLogin(); showPage('page-login'); }
-
-// ===== SETTINGS =====
-async function loadSettings() {
-  const data = await apiGet('getSettings');
-  if(data) { settingsCache=data; }
-}
-function loadSettingsToForm() {
-  ['set-name','set-tagline','set-hours','set-address','set-wa','set-pass','p-cuci-setrika','p-cuci','p-setrika','p-express','p-selimut'].forEach(k=>{
-    const el=document.getElementById(k); if(el&&settingsCache[k]) el.value=settingsCache[k];
-  });
-}
-async function saveSettings() {
-  showLoading('Menyimpan...');
-  const data={};
-  ['set-name','set-tagline','set-hours','set-address','set-wa','set-pass','p-cuci-setrika','p-cuci','p-setrika','p-express','p-selimut'].forEach(k=>{
-    const el=document.getElementById(k); if(el) data[k]=el.value;
-  });
-  const res=await apiPost('saveSettings',data);
-  if(res&&res.success) { Object.assign(settingsCache,data); calcPrice(); showToast('✅ Pengaturan disimpan!'); }
-  else showToast('❌ Gagal simpan.');
-  hideLoading();
-}
-function getPrice(service) {
-  const k=PRICE_MAP[service]?.key;
-  return parseInt(settingsCache[k]||document.getElementById(k)?.value||PRICE_MAP[service]?.def||7000);
-}
 
 // ===== TAB =====
 function switchTab(tab) {
@@ -436,23 +450,26 @@ async function submitOrder() {
   if(!name){showToast('⚠️ Nama wajib diisi!');return;}
   if(!phone){showToast('⚠️ Nomor HP wajib diisi!');return;}
   if(weight<=0){showToast('⚠️ Berat harus lebih dari 0!');return;}
+
   showLoading('Membuat nomor invoice...');
-  // Ambil invoice dari Sheets — dijamin unik, tidak bentrok
-  const invRes = await apiGet('getNextInvoice');
-  if(!invRes || !invRes.invoice) { hideLoading(); showToast('❌ Gagal buat invoice. Cek koneksi.'); return; }
-  const invoice = invRes.invoice;
+  // Ambil invoice dari Supabase — thread-safe, tidak bentrok
+  const invoice = await sbRpc('get_next_invoice');
+  if(!invoice) { hideLoading(); showToast('❌ Gagal buat invoice. Cek koneksi.'); return; }
+
   showLoading('Menyimpan order...');
-  const now=new Date();
-  const price=getPrice(service);
-  const total=price*weight;
-  const estDate=new Date();
+  const now = new Date();
+  const price = getPrice(service);
+  const total = price * weight;
+  const estDate = new Date();
   if(!isNaN(parseInt(est))) estDate.setDate(estDate.getDate()+parseInt(est));
-  const estLabel=est==='express'?'Hari ini':estDate.toLocaleDateString('id-ID',{day:'numeric',month:'short',year:'numeric'});
-  const order={invoice,name,phone,service,weight,total,note,status:0,est_label:estLabel,created_at:now.toISOString()};
-  const res=await apiPost('addOrder',order);
+  const estLabel = est==='express'?'Hari ini':estDate.toLocaleDateString('id-ID',{day:'numeric',month:'short',year:'numeric'});
+
+  const order = { invoice, name, phone, service, weight, total, note, status:0, est_label:estLabel, created_at:now.toISOString() };
+  const res = await sbPost('orders', order);
   hideLoading();
-  if(res&&res.success) {
-    showStruk(order); updateStats();
+  if(res) {
+    showStruk(order);
+    updateStats();
     document.getElementById('f-name').value='';
     document.getElementById('f-phone').value='';
     document.getElementById('f-weight').value='1';
@@ -487,6 +504,7 @@ function buildStrukHTML(o) {
     <div class="struk-footer">Tunjukkan kode saat mengambil 😊</div>
   `;
 }
+
 function showStruk(o) { currentStruk=o; document.getElementById('struk-content').innerHTML=buildStrukHTML(o); document.getElementById('modal-invoice').classList.add('open'); }
 function closeModal() { document.getElementById('modal-invoice').classList.remove('open'); }
 
@@ -563,26 +581,21 @@ function printRawBT() {
   window.location.href='rawbt:'+encodeURIComponent(lines);
 }
 
-// ===== KIRIM STRUK VIA WA =====
 function sendStrukWA() {
   if(!currentStruk) return;
-  const o = currentStruk;
-  const sn = settingsCache['set-name']||'Goklin Laundry';
-  const clean = o.phone.replace(/\D/g,'');
-  const num = clean.startsWith('0')?'62'+clean.slice(1):clean;
-  const msg = [
-    `🧾 *STRUK ${sn.toUpperCase()}*`,
-    ``,
+  const o=currentStruk;
+  const sn=settingsCache['set-name']||'Goklin Laundry';
+  const clean=o.phone.replace(/\D/g,'');
+  const num=clean.startsWith('0')?'62'+clean.slice(1):clean;
+  const msg=[
+    `🧾 *STRUK ${sn.toUpperCase()}*`,``,
     `Nama    : ${o.name}`,
     `Layanan : ${PRICE_MAP[o.service]?.label||o.service}`,
     `Berat   : ${o.weight} kg`,
     `Est.    : ${o.est_label||'-'}`,
-    o.note ? `Catatan : ${o.note}` : null,
-    ``,
-    `*Total  : Rp ${Number(o.total).toLocaleString('id')}*`,
-    ``,
-    `🔑 Kode Lacak: *${o.invoice}*`,
-    ``,
+    o.note?`Catatan : ${o.note}`:null,``,
+    `*Total  : Rp ${Number(o.total).toLocaleString('id')}*`,``,
+    `🔑 Kode Lacak: *${o.invoice}*`,``,
     `Tunjukkan kode ini saat mengambil cucian ya! 😊`,
     `Terima kasih sudah mempercayakan cucian Anda kepada kami 🫧`
   ].filter(x=>x!==null).join('\n');
@@ -592,9 +605,8 @@ function sendStrukWA() {
 // ===== ORDERS =====
 async function renderOrders(filter) {
   showLoading('Memuat order...');
-  allOrders=await apiGet('getOrders')||[];
+  allOrders = await sbGet('orders','select=*&order=created_at.desc') || [];
   hideLoading();
-  allOrders.sort((a,b)=>new Date(b.created_at)-new Date(a.created_at));
   const list=document.getElementById('orders-list');
   const filtered=filter==='semua'?allOrders:allOrders.filter(o=>String(o.status)===filter);
   if(!filtered.length) {
@@ -632,11 +644,11 @@ function reprintStruk(invoice) {
   showStruk(o);
 }
 
-async function updateStatus(invoice,newStatus) {
+async function updateStatus(invoice, newStatus) {
   showLoading('Mengubah status...');
-  const res=await apiPost('updateStatus',{invoice,status:parseInt(newStatus)});
+  const ok = await sbPatch('orders',`invoice=eq.${invoice}`,{ status: parseInt(newStatus) });
   hideLoading();
-  if(res&&res.success) {
+  if(ok) {
     showToast('✅ Status diperbarui!');
     renderOrders(document.querySelector('.filter-tab.active')?.dataset.filter||'semua');
     updateStats();
@@ -656,20 +668,22 @@ function sendWA(phone,name,invoice) {
   window.open(`https://wa.me/${num}?text=${msg}`,'_blank');
 }
 
+// ===== STATS =====
 async function updateStats() {
-  const orders=await apiGet('getOrders')||[];
-  const today=new Date().toISOString().slice(0,10);
-  const tod=orders.filter(o=>o.created_at&&o.created_at.startsWith(today));
-  const rev=tod.reduce((s,o)=>s+Number(o.total),0);
+  const orders = await sbGet('orders','select=status,total,created_at') || [];
+  const today = new Date().toISOString().slice(0,10);
+  const tod = orders.filter(o=>o.created_at&&o.created_at.startsWith(today));
+  const rev = tod.reduce((s,o)=>s+Number(o.total),0);
   document.getElementById('stat-today').textContent=tod.length;
   document.getElementById('stat-revenue').textContent='Rp '+(rev>=1000?(rev/1000).toFixed(0)+'rb':rev.toLocaleString('id'));
   document.getElementById('stat-active').textContent=orders.filter(o=>o.status>0&&o.status<4).length;
   document.getElementById('stat-ready').textContent=orders.filter(o=>o.status==4).length;
 }
 
+// ===== REPORT =====
 async function renderReport() {
   showLoading('Memuat laporan...');
-  const orders=await apiGet('getOrders')||[];
+  const orders = await sbGet('orders','select=*') || [];
   hideLoading();
   const today=new Date().toISOString().slice(0,10);
   const tod=orders.filter(o=>o.created_at&&o.created_at.startsWith(today));
@@ -686,6 +700,7 @@ async function renderReport() {
   ).join('')||'<div class="report-row" style="color:var(--text-muted);">Belum ada data</div>';
 }
 
+// ===== TOAST =====
 function showToast(msg) {
   const t=document.getElementById('toast');
   t.textContent=msg; t.classList.add('show');
@@ -698,9 +713,8 @@ window.addEventListener('load', async () => {
   await loadSettings();
   calcPrice();
   hideLoading();
-  // Kalau sudah login, langsung masuk dashboard
-  if(isLoggedIn()) { enterDashboard(); }
-  else { showPage('page-login'); }
+  if(isLoggedIn()) enterDashboard();
+  else showPage('page-login');
 });
 </script>
 </body>

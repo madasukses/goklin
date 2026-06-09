@@ -8,21 +8,18 @@
 <style>
 :root {
   --blue: #1a56db; --blue-light: #ebf1ff;
-  --teal: #0d9488; --amber: #d97706; --amber-light: #fef3c7;
+  --teal: #0d9488; --amber: #d97706;
   --green: #16a34a; --green-light: #dcfce7;
   --gray-100: #f1f5f9; --gray-200: #e2e8f0; --gray-300: #cbd5e1;
   --gray-400: #94a3b8; --gray-500: #64748b; --gray-900: #0f172a;
-  --bg: #f0f4ff; --card: #ffffff; --text: #1e293b; --text-muted: #64748b;
-  --radius: 16px; --radius-sm: 10px;
-  --shadow: 0 2px 12px rgba(26,86,219,0.08);
+  --card: #ffffff; --text: #1e293b; --text-muted: #64748b;
+  --radius-sm: 10px; --radius: 16px;
 }
-* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-body { font-family: 'Plus Jakarta Sans', sans-serif; background: linear-gradient(160deg,#1a56db 0%,#0d9488 100%); color: white; min-height: 100dvh; overflow-x: hidden; position: relative; }
-
+* { box-sizing:border-box; margin:0; padding:0; -webkit-tap-highlight-color:transparent; }
+body { font-family:'Plus Jakarta Sans',sans-serif; background:linear-gradient(160deg,#1a56db 0%,#0d9488 100%); color:white; min-height:100dvh; overflow-x:hidden; position:relative; }
 .bg-circle { position:absolute; border-radius:50%; background:rgba(255,255,255,0.05); }
 .bg-circle.c1 { width:300px;height:300px;top:-80px;right:-80px; }
 .bg-circle.c2 { width:200px;height:200px;bottom:120px;left:-60px; }
-
 .home-header { padding:56px 24px 24px; position:relative; z-index:1; }
 .home-logo { display:flex;align-items:center;gap:10px;margin-bottom:32px; }
 .logo-icon { width:44px;height:44px;background:rgba(255,255,255,0.2);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px; }
@@ -30,42 +27,35 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: linear-gradient
 .logo-sub { font-size:11px;opacity:0.7;margin-top:1px; }
 .hero-title { font-size:28px;font-weight:700;line-height:1.25;letter-spacing:-0.5px;margin-bottom:10px; }
 .hero-sub { font-size:14px;opacity:0.8;line-height:1.6;margin-bottom:28px; }
-
 .info-cards { display:flex;flex-direction:column;gap:10px;margin-bottom:28px; }
 .info-card { background:rgba(255,255,255,0.13);border:1px solid rgba(255,255,255,0.2);border-radius:var(--radius-sm);padding:12px 16px;display:flex;align-items:center;gap:12px; }
 .info-card-icon { font-size:18px; }
 .info-card-label { font-size:11px;opacity:0.7; }
 .info-card-value { font-size:14px;font-weight:600; }
-
 .track-section { background:var(--card);border-radius:24px 24px 0 0;padding:28px 24px 48px;position:relative;z-index:1; }
 .section-title { font-size:17px;font-weight:700;color:var(--text);margin-bottom:4px; }
 .section-sub { font-size:13px;color:var(--text-muted);margin-bottom:20px; }
-
 .input-field { width:100%;padding:14px 16px;border:1.5px solid var(--gray-200);border-radius:var(--radius-sm);font-size:16px;font-family:'DM Mono',monospace;font-weight:500;color:var(--text);background:#f8fafc;outline:none;transition:border-color .2s,box-shadow .2s;text-transform:uppercase;letter-spacing:0.08em; }
 .input-field:focus { border-color:var(--blue);box-shadow:0 0 0 3px rgba(26,86,219,0.1);background:#fff; }
 .input-field::placeholder { color:var(--gray-300);font-style:italic;text-transform:none;letter-spacing:0;font-family:'Plus Jakarta Sans',sans-serif; }
-
 .btn { width:100%;padding:15px;border-radius:var(--radius-sm);font-size:15px;font-weight:600;font-family:'Plus Jakarta Sans',sans-serif;border:none;cursor:pointer;transition:transform .15s;display:flex;align-items:center;justify-content:center;gap:8px; }
 .btn:active { transform:scale(0.97); }
 .btn-primary { background:linear-gradient(135deg,var(--blue),#4f7ef7);color:white;box-shadow:0 4px 14px rgba(26,86,219,0.3); }
-
 .track-result { margin-top:20px;border:1.5px solid var(--gray-200);border-radius:var(--radius);overflow:hidden;display:none; }
 .track-result.visible { display:block;animation:fadeIn .3s ease; }
 @keyframes fadeIn { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:translateY(0)} }
 .track-result-header { padding:16px;background:#f8fafc;border-bottom:1px solid var(--gray-200); }
-.track-invoice { font-family:'DM Mono',monospace;font-size:13px;font-weight:500;color:var(--blue);margin-bottom:4px; }
+.track-invoice { font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:var(--blue);margin-bottom:4px;letter-spacing:0.05em; }
 .track-name { font-size:16px;font-weight:700;color:var(--text); }
 .track-detail { font-size:13px;color:var(--text-muted);margin-top:2px; }
 .track-result-body { padding:16px;background:white; }
-
 .status-badge { display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:99px;font-size:13px;font-weight:600;margin-bottom:16px; }
 .status-0 { background:var(--gray-100);color:var(--gray-500); }
 .status-1 { background:var(--blue-light);color:var(--blue); }
-.status-2 { background:var(--amber-light);color:var(--amber); }
-.status-3 { background:var(--amber-light);color:var(--amber); }
+.status-2 { background:#fef3c7;color:var(--amber); }
+.status-3 { background:#fef3c7;color:var(--amber); }
 .status-4 { background:var(--green-light);color:var(--green); }
 .status-5 { background:var(--gray-100);color:var(--gray-400); }
-
 .progress-steps { display:flex;align-items:center; }
 .prog-step { display:flex;flex-direction:column;align-items:center;flex:1; }
 .prog-dot { width:22px;height:22px;border-radius:50%;border:2px solid var(--gray-200);background:white;display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--gray-300);transition:all .3s; }
@@ -77,10 +67,8 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: linear-gradient
 .prog-label.active { color:var(--blue);font-weight:700; }
 .prog-line { flex:1;height:2px;background:var(--gray-200);margin-bottom:16px; }
 .prog-line.done { background:var(--green); }
-
 .toast { position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--gray-900);color:white;padding:10px 20px;border-radius:99px;font-size:13px;font-weight:500;z-index:999;opacity:0;transition:opacity .3s,transform .3s;white-space:nowrap;pointer-events:none; }
 .toast.show { opacity:1;transform:translateX(-50%) translateY(0); }
-
 .loading-bar { position:fixed;top:0;left:0;right:0;height:3px;background:rgba(255,255,255,0.3);z-index:999;display:none; }
 .loading-bar.show { display:block; }
 .loading-bar-fill { height:100%;background:white;border-radius:2px;animation:loadbar 1.5s ease infinite; }
@@ -88,7 +76,6 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: linear-gradient
 </style>
 </head>
 <body>
-
 <div class="loading-bar" id="loading-bar"><div class="loading-bar-fill"></div></div>
 <div class="bg-circle c1"></div>
 <div class="bg-circle c2"></div>
@@ -133,22 +120,18 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: linear-gradient
 <div class="toast" id="toast"></div>
 
 <script>
-const API_URL = 'https://script.google.com/macros/s/AKfycby94b_zWONKZJa5VpiWW1hS4Bsm6pugJyaHcRpxFa3_U-PZ7EW_9qJcmt-OxApVbrU/exec';
+const SUPA_URL = 'https://ccgoraufsoljgrdatozh.supabase.co';
+const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNjZ29yYXVmc29samdyZGF0b3poIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODEwMDAxNTUsImV4cCI6MjA5NjU3NjE1NX0.clzivXD50No__1Nu_bFkeGU6Rg9qk5ih0ZrHqLVb7AQ';
+const H = { 'apikey':SUPA_KEY, 'Authorization':'Bearer '+SUPA_KEY };
 
 const PRICE_MAP = {
-  'cuci-setrika':{ label:'Cuci + Setrika' },
-  'cuci':        { label:'Cuci Saja' },
-  'setrika':     { label:'Setrika Saja' },
-  'express':     { label:'Express' },
-  'selimut':     { label:'Selimut/Karpet' }
+  'cuci-setrika':{ label:'Cuci + Setrika' }, 'cuci':{ label:'Cuci Saja' },
+  'setrika':{ label:'Setrika Saja' }, 'express':{ label:'Express' }, 'selimut':{ label:'Selimut/Karpet' }
 };
 const STATUS_MAP = {
-  0:{ label:'📥 Diterima',         cls:'status-0' },
-  1:{ label:'🫧 Sedang Dicuci',    cls:'status-1' },
-  2:{ label:'🌀 Sedang Disetrika', cls:'status-2' },
-  3:{ label:'🧺 Menunggu Ambil',   cls:'status-3' },
-  4:{ label:'✅ Siap Diambil',     cls:'status-4' },
-  5:{ label:'📦 Sudah Diambil',    cls:'status-5' }
+  0:{ label:'📥 Diterima', cls:'status-0' }, 1:{ label:'🫧 Sedang Dicuci', cls:'status-1' },
+  2:{ label:'🌀 Sedang Disetrika', cls:'status-2' }, 3:{ label:'🧺 Menunggu Ambil', cls:'status-3' },
+  4:{ label:'✅ Siap Diambil', cls:'status-4' }, 5:{ label:'📦 Sudah Diambil', cls:'status-5' }
 };
 
 function showLoading() { document.getElementById('loading-bar').classList.add('show'); }
@@ -161,13 +144,15 @@ function showToast(msg) {
 
 async function loadSettings() {
   try {
-    const r = await fetch(`${API_URL}?action=getSettings`);
-    const data = await r.json();
-    if(data['set-name'])    document.getElementById('store-name-display').textContent = data['set-name'];
-    if(data['set-tagline']) document.getElementById('store-tagline-display').textContent = data['set-tagline'];
-    if(data['set-hours'])   document.getElementById('store-hours-display').textContent = data['set-hours'];
-    if(data['set-address']) document.getElementById('store-address-display').textContent = data['set-address'];
-    if(data['set-wa'])      document.getElementById('store-wa-display').textContent = data['set-wa'];
+    const r = await fetch(`${SUPA_URL}/rest/v1/settings?select=key,value`, { headers: H });
+    const rows = await r.json();
+    rows.forEach(row => {
+      if(row.key==='set-name')    document.getElementById('store-name-display').textContent = row.value;
+      if(row.key==='set-tagline') document.getElementById('store-tagline-display').textContent = row.value;
+      if(row.key==='set-hours')   document.getElementById('store-hours-display').textContent = row.value;
+      if(row.key==='set-address') document.getElementById('store-address-display').textContent = row.value;
+      if(row.key==='set-wa')      document.getElementById('store-wa-display').textContent = row.value;
+    });
   } catch(e) {}
 }
 
@@ -176,12 +161,12 @@ async function trackOrder() {
   if(!code) { showToast('⚠️ Masukkan kode invoice dulu!'); return; }
   showLoading();
   try {
-    const r = await fetch(`${API_URL}?action=getOrders`);
-    const orders = await r.json();
+    const r = await fetch(`${SUPA_URL}/rest/v1/orders?invoice=eq.${code}&select=*`, { headers: H });
+    const rows = await r.json();
     hideLoading();
-    const o = orders.find(x=>x.invoice&&x.invoice.toUpperCase()===code);
     const result = document.getElementById('track-result');
-    if(!o) { showToast('❌ Kode tidak ditemukan.'); result.classList.remove('visible'); return; }
+    if(!rows.length) { showToast('❌ Kode tidak ditemukan.'); result.classList.remove('visible'); return; }
+    const o = rows[0];
     document.getElementById('tr-invoice').textContent = o.invoice;
     document.getElementById('tr-name').textContent = o.name;
     document.getElementById('tr-detail').textContent = `${PRICE_MAP[o.service]?.label||o.service} · ${o.weight} kg · Est. ${o.est_label}`;
