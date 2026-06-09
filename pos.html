@@ -461,9 +461,8 @@ async function submitOrder() {
   // Ambil invoice dari Supabase — thread-safe, tidak bentrok
   const invResult = await sbRpc('get_next_invoice');
   if(!invResult) { hideLoading(); showToast('❌ Gagal buat invoice. Cek koneksi.'); return; }
-  // Handle both {invoice: "GK..."} and plain string "GK..."
-  const invoice = typeof invResult === 'object' ? invResult.invoice : invResult;
-  if(!invoice) { hideLoading(); showToast('❌ Gagal buat invoice. Cek koneksi.'); return; }
+  const invoice = String(invResult.invoice || invResult).replace(/"/g,'').trim();
+  if(!invoice || invoice === 'undefined') { hideLoading(); showToast('❌ Gagal buat invoice. Cek koneksi.'); return; }
 
   showLoading('Menyimpan order...');
   const now = new Date();
