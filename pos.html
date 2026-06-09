@@ -459,7 +459,10 @@ async function submitOrder() {
 
   showLoading('Membuat nomor invoice...');
   // Ambil invoice dari Supabase — thread-safe, tidak bentrok
-  const invoice = await sbRpc('get_next_invoice');
+  const invResult = await sbRpc('get_next_invoice');
+  if(!invResult) { hideLoading(); showToast('❌ Gagal buat invoice. Cek koneksi.'); return; }
+  // Handle both {invoice: "GK..."} and plain string "GK..."
+  const invoice = typeof invResult === 'object' ? invResult.invoice : invResult;
   if(!invoice) { hideLoading(); showToast('❌ Gagal buat invoice. Cek koneksi.'); return; }
 
   showLoading('Menyimpan order...');
