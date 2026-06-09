@@ -328,8 +328,12 @@ async function sbPatch(table, match, body) {
   return r.ok;
 }
 async function sbRpc(fn, params={}) {
-  const r = await fetch(`${SUPA_URL}/rest/v1/rpc/${fn}`, { method:'POST', headers:H, body:JSON.stringify(params) });
-  return r.ok ? r.json() : null;
+  try {
+    const r = await fetch(`${SUPA_URL}/rest/v1/rpc/${fn}`, { method:'POST', headers:H, body:JSON.stringify(params) });
+    if(!r.ok) return null;
+    const text = await r.text();
+    try { return JSON.parse(text); } catch(e) { return text.replace(/"/g,'').trim(); }
+  } catch(e) { return null; }
 }
 
 const PRICE_MAP = {
